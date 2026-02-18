@@ -1,16 +1,49 @@
-# React + Vite
+LuminaPay: White Belt Submission
+Project Repository: stellar-white-belt-dapp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Project Description
+LuminaPay is a decentralized application (dApp) built on the Stellar Testnet. It serves as a secure gateway for users to manage their digital assets with a focus on high-precision balance tracking and transparent transaction history. The project was developed to satisfy the Level 1 – White Belt requirements of the Stellar Developer Journey.
 
-Currently, two official plugins are available:
+2. Key Features
+Identity Connection: Seamlessly integrates with the Freighter Wallet to authorize sessions without exposing private keys.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+High-Precision Balance: Fetches and displays native XLM balances down to seven decimal places directly from the Horizon server.
 
-## React Compiler
+Immutable Ledger Log: A custom-built transaction history that records the date, time, recipient, and transaction hash for every successful transfer.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Cyber-Vogue UI: A modern, glassmorphic interface built with React and Tailwind CSS v4, featuring animated mesh gradients and ambient lighting.
 
-## Expanding the ESLint configuration
+3. Tech Stack
+Framework: React (Vite)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Styling: Tailwind CSS v4
+
+Blockchain SDK: @stellar/stellar-sdk
+
+Wallet API: @stellar/freighter-api
+
+Network: Stellar Testnet (Horizon)
+
+4. Setup Instructions
+To run LuminaPay locally, follow these steps:
+
+Clone the Repository:
+
+Bash
+git clone https://github.com/YOUR_USERNAME/stellar-white-belt-dapp.git
+cd stellar-white-belt-dapp
+Install Dependencies:
+
+Bash
+npm install
+Launch the Development Server:
+
+Bash
+npm run dev
+Connect Wallet:
+
+Ensure the Freighter extension is installed in your browser.
+
+Set Freighter to Testnet in the settings menu.
+
+Click "Initialize Connection" in the LuminaPay dashboard.
