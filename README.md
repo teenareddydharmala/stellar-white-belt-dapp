@@ -1,49 +1,56 @@
-LuminaPay: White Belt Submission
-Project Repository: stellar-white-belt-dapp
+# 🥋 LuminaPay: Stellar White Belt dApp
 
-1. Project Description
-LuminaPay is a decentralized application (dApp) built on the Stellar Testnet. It serves as a secure gateway for users to manage their digital assets with a focus on high-precision balance tracking and transparent transaction history. The project was developed to satisfy the Level 1 – White Belt requirements of the Stellar Developer Journey.
+**LuminaPay** is a high-precision decentralized application (dApp) built on the Stellar Testnet. Developed as part of the Stellar Level 1 challenge, it provides a "Cyber-Vogue" interface for secure wallet connection, real-time balance tracking, and transaction feedback.
 
-2. Key Features
-Identity Connection: Seamlessly integrates with the Freighter Wallet to authorize sessions without exposing private keys.
 
-High-Precision Balance: Fetches and displays native XLM balances down to seven decimal places directly from the Horizon server.
 
-Immutable Ledger Log: A custom-built transaction history that records the date, time, recipient, and transaction hash for every successful transfer.
+## 🌟 Key Features
+* **Secure Identity Connection:** Seamlessly integrates with the **Freighter Wallet** API to authorize user sessions without exposing private keys.
+* **High-Precision Asset Tracking:** Fetches and displays native XLM balances with full 7-decimal precision directly from the Horizon server, ensuring zero rounding errors.
+* **Immutable Ledger History:** A custom transaction log ("Special Log") that records time, date, recipient, and transaction hash for every confirmed transfer.
+* **Cyber-Vogue UI/UX:** A modern glassmorphic dashboard built with **React** and **Tailwind CSS v4**, featuring animated mesh gradients and high-fashion typography.
 
-Cyber-Vogue UI: A modern, glassmorphic interface built with React and Tailwind CSS v4, featuring animated mesh gradients and ambient lighting.
+## 🛠️ Tech Stack
+* **Frontend:** React (Vite)
+* **Styling:** Tailwind CSS v4
+* **Blockchain Bridge:** `@stellar/stellar-sdk`
+* **Wallet Integration:** `@stellar/freighter-api`
+* **Network:** Stellar Testnet
 
-3. Tech Stack
-Framework: React (Vite)
 
-Styling: Tailwind CSS v4
 
-Blockchain SDK: @stellar/stellar-sdk
+## 🚀 Setup & Installation
+Follow these steps to run LuminaPay in your local development environment:
 
-Wallet API: @stellar/freighter-api
+1.  **Clone the Repository:**
+    ```bash
+    git clone [https://github.com/teenareddydharmala/stellar-white-belt-dapp.git](https://github.com/teenareddydharmala/stellar-white-belt-dapp.git)
+    cd stellar-white-belt-dapp
+    ```
+2.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Launch Development Server:**
+    ```bash
+    npm run dev
+    ```
+4.  **Configure Wallet:**
+    * Install the [Freighter Extension](https://www.freighter.app/).
+    * Open Freighter Settings (gear icon) and toggle the network to **Testnet**.
+    * Fund your account using the [Stellar Laboratory Friendbot](https://laboratory.stellar.org/#account-creator?network=testnet).
 
-Network: Stellar Testnet (Horizon)
+## 📸 Screenshots
+*(Include your captures here to satisfy the submission checklist)*
+* **Wallet Connected State:** Showing the authorized public key.
+* **Balance Display:** Showing the high-precision, non-rounded XLM count.
+* **Transaction Result:** Showing the "Protocol Confirmed" status and the Immutable Ledger History log.
 
-4. Setup Instructions
-To run LuminaPay locally, follow these steps:
+## 📝 Development Journey Log
+This project documents the transition from basic scripting to a full-stack dApp architecture. Key technical milestones included:
+* **Horizon Sync:** Establishing a real-time data bridge for high-precision balance fetching.
+* **Protocol Alignment:** Resolving `TypeError` and "2015 Public Network" warnings by implementing modern **Operation.payment** syntax and explicit **Testnet Passphrases**.
+* **Aesthetic Engineering:** Designing a premium, cybersecurity-inspired UI to match the security of the underlying blockchain.
 
-Clone the Repository:
-
-Bash
-git clone https://github.com/YOUR_USERNAME/stellar-white-belt-dapp.git
-cd stellar-white-belt-dapp
-Install Dependencies:
-
-Bash
-npm install
-Launch the Development Server:
-
-Bash
-npm run dev
-Connect Wallet:
-
-Ensure the Freighter extension is installed in your browser.
-
-Set Freighter to Testnet in the settings menu.
-
-Click "Initialize Connection" in the LuminaPay dashboard.
+---
+With love 💜 Teena
