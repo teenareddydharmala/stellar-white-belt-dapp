@@ -1,53 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { isConnected, requestAccess } from "@stellar/freighter-api";
 
 function App() {
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
 
-  // Logic: Connect Wallet handler
   const handleConnect = async () => {
     setError("");
     try {
       if (await isConnected()) {
-        const result = await requestAccess(); // This triggers the popup
-        if (result.address) {
-          setAddress(result.address);
-        } else if (result.error) {
-          setError(result.error);
-        }
+        const result = await requestAccess();
+        if (result.address) setAddress(result.address);
+        else if (result.error) setError(result.error);
       } else {
-        setError("Please install the Freighter extension first!");
+        setError("Freighter wallet not detected.");
       }
     } catch (err) {
-      setError("Connection failed. Try again.");
+      setError("Connection failed.");
     }
   };
 
-  // Logic: Disconnect (Simple state clear)
-  const handleDisconnect = () => setAddress("");
-
   return (
-    <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center p-4">
-      {/* Nebula Background Orbs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900/20 blur-[150px] -z-10" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-900/10 blur-[150px] -z-10" />
+    // 1. Cyber-Vogue Background: Deep Charcoal with Silver Sheen
+    <div className="min-h-screen bg-[#020202] flex items-center justify-center p-6 font-sans">
+      
+      {/* 2. Abstract Geometric Accents: Titanium Silver & Ultraviolet */}
+      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-slate-400/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="w-full max-w-md bg-zinc-950/50 backdrop-blur-3xl border border-white/5 p-8 rounded-[2rem] shadow-2xl">
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
-            LuminaPay
+      {/* 3. The "Liquid Metal" Glass Card */}
+      <div className="relative w-full max-w-md bg-white/[0.02] backdrop-blur-2xl border border-white/10 rounded-t-[3rem] rounded-b-[1rem] p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        
+        {/* Decorative Top Bar */}
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-1 bg-white/20 rounded-full" />
+
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-light tracking-[0.3em] uppercase text-white mb-2">
+            Lumina<span className="font-black text-purple-500">Pay</span>
           </h1>
-          <p className="text-zinc-500 text-xs tracking-widest mt-2">SECURE STELLAR GATEWAY</p>
-        </div>
+          <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto" />
+          <p className="text-slate-500 text-[10px] uppercase tracking-[0.5em] mt-4 font-bold">White Belt Protocol</p>
+        </header>
 
         {address ? (
-          <div className="space-y-6">
-            <div className="bg-cyan-500/5 border border-cyan-500/20 p-4 rounded-2xl">
-              <p className="text-[10px] text-cyan-500 uppercase font-bold mb-1">Connected Address</p>
-              <p className="text-zinc-200 font-mono text-xs break-all">{address}</p>
+          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            {/* Connected Display */}
+            <div className="p-6 rounded-3xl bg-zinc-900/50 border border-white/5 space-y-2">
+              <span className="text-[10px] text-purple-400 uppercase tracking-widest font-bold">Active Wallet</span>
+              <p className="text-slate-300 font-mono text-xs break-all leading-relaxed">
+                {address}
+              </p>
             </div>
-            <button onClick={handleDisconnect} className="w-full py-4 rounded-2xl bg-zinc-900 text-zinc-400 hover:text-white transition-colors border border-white/5">
+            
+            <button 
+              onClick={() => setAddress("")}
+              className="w-full py-4 rounded-2xl border border-white/10 text-white/40 hover:text-white hover:border-white/30 transition-all text-sm uppercase tracking-widest"
+            >
               Disconnect
             </button>
           </div>
@@ -55,13 +63,15 @@ function App() {
           <div className="space-y-6">
             <button 
               onClick={handleConnect}
-              className="w-full py-4 rounded-2xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all active:scale-95"
+              className="group relative w-full py-5 rounded-2xl bg-white text-black font-black text-sm uppercase tracking-[0.2em] transition-all hover:bg-purple-500 hover:text-white overflow-hidden"
             >
-              Connect Wallet
+              <span className="relative z-10">Connect Identity</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </button>
-            {error && <p className="text-red-400 text-center text-xs">{error}</p>}
+            {error && <p className="text-red-500 text-center text-[10px] uppercase tracking-widest font-bold animate-pulse">{error}</p>}
           </div>
         )}
+
       </div>
     </div>
   );
