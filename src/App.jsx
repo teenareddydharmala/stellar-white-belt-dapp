@@ -1,77 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { isConnected, requestAccess } from "@stellar/freighter-api";
+import { Horizon } from "@stellar/stellar-sdk";
+
+// Connect to Testnet Horizon
+const server = new Horizon.Server("https://horizon-testnet.stellar.org");
 
 function App() {
   const [address, setAddress] = useState("");
-  const [error, setError] = useState("");
+  const [balance, setBalance] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const fetchBalance = async (pubKey) => {
+    setLoading(true);
+    try {
+      const account = await server.loadAccount(pubKey); // Requirement #3: Fetching account
+      const nativeBalance = account.balances.find(b => b.asset_type === 'native');
+      setBalance(nativeBalance ? nativeBalance.balance : "0");
+    } catch (err) {
+      console.error("Balance fetch failed", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleConnect = async () => {
-    setError("");
-    try {
-      if (await isConnected()) {
-        const result = await requestAccess();
-        if (result.address) setAddress(result.address);
-        else if (result.error) setError(result.error);
-      } else {
-        setError("Freighter wallet not detected.");
+    if (await isConnected()) {
+      const result = await requestAccess(); // Requirement #2: Wallet Connect
+      if (result.address) {
+        setAddress(result.address);
+        fetchBalance(result.address); // Trigger balance fetch immediately
       }
-    } catch (err) {
-      setError("Connection failed.");
     }
   };
 
   return (
-    // 1. Cyber-Vogue Background: Deep Charcoal with Silver Sheen
-    <div className="min-h-screen bg-[#020202] flex items-center justify-center p-6 font-sans">
-      
-      {/* 2. Abstract Geometric Accents: Titanium Silver & Ultraviolet */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-slate-400/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
-
-      {/* 3. The "Liquid Metal" Glass Card */}
-      <div className="relative w-full max-w-md bg-white/[0.02] backdrop-blur-2xl border border-white/10 rounded-t-[3rem] rounded-b-[1rem] p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+    <div className="min-h-screen bg-[#020202] text-white flex items-center justify-center p-6">
+      <div className="relative w-full max-w-md bg-white/[0.02] backdrop-blur-3xl border border-white/10 rounded-[3rem] p-10 shadow-2xl">
         
-        {/* Decorative Top Bar */}
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-1 bg-white/20 rounded-full" />
-
         <header className="text-center mb-12">
-          <h1 className="text-4xl font-light tracking-[0.3em] uppercase text-white mb-2">
+          <h1 className="text-4xl font-light tracking-[0.3em] uppercase">
             Lumina<span className="font-black text-purple-500">Pay</span>
           </h1>
-          <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto" />
-          <p className="text-slate-500 text-[10px] uppercase tracking-[0.5em] mt-4 font-bold">White Belt Protocol</p>
+          <p className="text-slate-500 text-[10px] uppercase tracking-[0.5em] mt-4 font-bold">Identity & Assets</p>
         </header>
 
-        {address ? (
-          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            {/* Connected Display */}
-            <div className="p-6 rounded-3xl bg-zinc-900/50 border border-white/5 space-y-2">
-              <span className="text-[10px] text-purple-400 uppercase tracking-widest font-bold">Active Wallet</span>
-              <p className="text-slate-300 font-mono text-xs break-all leading-relaxed">
-                {address}
-              </p>
+        {!address ? (
+          <button onClick={handleConnect} className="w-full py-5 rounded-2xl bg-white text-black font-black uppercase tracking-widest hover:bg-purple-500 hover:text-white transition-all">
+            Connect Identity
+          </button>
+        ) : (
+          <div className="space-y-6 animate-in fade-in zoom-in duration-500">
+            {/* Balance Display: Requirement #3 */}
+            <div className="p-8 rounded-3xl bg-gradient-to-br from-purple-900/20 to-transparent border border-purple-500/20 text-center">
+              <span className="text-[10px] text-purple-400 uppercase tracking-widest font-bold">XLM Balance</span>
+              <div className="text-5xl font-light mt-2">
+                {loading ? "..." : parseFloat(balance).toLocaleString()}
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-zinc-900/50 border border-white/5">
+              <span className="text-[8px] text-slate-500 uppercase font-bold block mb-1">Vault Address</span>
+              <p className="text-[10px] font-mono text-slate-400 break-all">{address}</p>
             </div>
             
-            <button 
-              onClick={() => setAddress("")}
-              className="w-full py-4 rounded-2xl border border-white/10 text-white/40 hover:text-white hover:border-white/30 transition-all text-sm uppercase tracking-widest"
-            >
-              Disconnect
+            <button onClick={() => setAddress("")} className="w-full text-slate-600 hover:text-white text-[10px] uppercase tracking-widest transition-colors">
+              Reset Session
             </button>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            <button 
-              onClick={handleConnect}
-              className="group relative w-full py-5 rounded-2xl bg-white text-black font-black text-sm uppercase tracking-[0.2em] transition-all hover:bg-purple-500 hover:text-white overflow-hidden"
-            >
-              <span className="relative z-10">Connect Identity</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </button>
-            {error && <p className="text-red-500 text-center text-[10px] uppercase tracking-widest font-bold animate-pulse">{error}</p>}
           </div>
         )}
-
       </div>
     </div>
   );
