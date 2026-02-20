@@ -1,6 +1,6 @@
 # 🥋 LuminaPay: Stellar White Belt dApp
 
-**LuminaPay** is a high-precision decentralized application (dApp) built on the Stellar Testnet. Developed as part of the Stellar Level 1 challenge, it provides a "Cyber-Vogue" interface for secure wallet connection, real-time balance tracking, and transaction feedback.
+**LuminaPay** is a high-precision decentralized application (dApp) built on the Stellar Testnet. Developed as part of the Stellar Level 1 challenge.
 
 
 
@@ -8,7 +8,7 @@
 * **Secure Identity Connection:** Seamlessly integrates with the **Freighter Wallet** API to authorize user sessions without exposing private keys.
 * **High-Precision Asset Tracking:** Fetches and displays native XLM balances with full 7-decimal precision directly from the Horizon server, ensuring zero rounding errors.
 * **Immutable Ledger History:** A custom transaction log ("Special Log") that records time, date, recipient, and transaction hash for every confirmed transfer.
-* **Cyber-Vogue UI/UX:** A modern glassmorphic dashboard built with **React** and **Tailwind CSS v4**, featuring animated mesh gradients and high-fashion typography.
+* ** UI/UX:** A modern glassmorphic dashboard built with **React** and **Tailwind CSS v4**, featuring animated mesh gradients and high-fashion typography.
 
 ## 🛠️ Tech Stack
 * **Frontend:** React (Vite)
@@ -50,7 +50,7 @@ Follow these steps to run LuminaPay in your local development environment:
 This project documents the transition from basic scripting to a full-stack dApp architecture. Key technical milestones included:
 * **Horizon Sync:** Establishing a real-time data bridge for high-precision balance fetching.
 * **Protocol Alignment:** Resolving `TypeError` and "2015 Public Network" warnings by implementing modern **Operation.payment** syntax and explicit **Testnet Passphrases**.
-* **Aesthetic Engineering:** Designing a premium, cybersecurity-inspired UI to match the security of the underlying blockchain.
+
 
 ---
 With love 💜 Teena
