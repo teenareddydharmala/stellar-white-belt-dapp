@@ -41,7 +41,6 @@ Follow these steps to run LuminaPay in your local development environment:
     * Fund your account using the [Stellar Laboratory Friendbot](https://laboratory.stellar.org/#account-creator?network=testnet).
 
 ## 📸 Screenshots
-*(Include your captures here to satisfy the submission checklist)*
 * **Wallet Connected State:** Showing the authorized public key.
 * **Balance Display:** Showing the high-precision, non-rounded XLM count.
 * **Transaction Result:** Showing the "Protocol Confirmed" status and the Immutable Ledger History log.
