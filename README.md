@@ -24,7 +24,7 @@ Follow these steps to run LuminaPay in your local development environment:
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/teenareddydharmala/stellar-white-belt-dapp.git](https://github.com/teenareddydharmala/stellar-white-belt-dapp.git)
+    git clone https://github.com/teenareddydharmala/stellar-white-belt-dapp.git
     cd stellar-white-belt-dapp
     ```
 2.  **Install Dependencies:**
